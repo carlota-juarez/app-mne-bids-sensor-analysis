@@ -1,0 +1,33 @@
+{
+  "bids": "input/bids",
+  "app2_output": "input/derivates",
+  "contrasts": [
+    ["auditory", "visual"],
+    ["faces", "scrambled"]
+  ],
+  "decode": true,
+  "decoding_which_epochs": "local",
+  "decoding_epochs_tmin": -0.2,
+  "decoding_epochs_tmax": 0.8,
+  "decoding_metric": "roc_auc",
+  "decoding_n_splits": 5,
+  "decoding_time": true,
+  "decoding_time_decim": 2,
+  "decoding_time_generalization": true,
+  "decoding_time_generalization_decim": 2,
+  "decoding_csp": false,
+  "decoding_csp_times": [0.0, 0.4],
+  "decoding_csp_freqs": [8.0, 12.0],
+  "n_boot": 1000,
+  "cluster_forming_t_threshold": 2.1,
+  "cluster_n_permutations": 1000,
+  "cluster_permutation_p_threshold": 0.05,
+  "time_frequency_conditions": ["auditory", "visual"],
+  "time_frequency_freq_min": 4.0,
+  "time_frequency_freq_max": 30.0,
+  "time_frequency_subtract_evoked": false,
+  "time_frequency_baseline": [-0.2, 0.0],
+  "time_frequency_baseline_mode": "logratio",
+  "time_frequency_crop": [0.0, 0.5],
+  "interpolate_bads_grand_average": true
+}
