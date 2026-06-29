@@ -188,7 +188,7 @@ with open(file_name, 'w') as f:
 
 # Run python script
 
-command = ["mne_bids_pipeline", f"--config={file_name}", "--steps=sensor,report"]
+command = ["mne_bids_pipeline", f"--config={file_name}", "--steps=sensor"]
 
 try:
     subprocess.run(command, check=True)
