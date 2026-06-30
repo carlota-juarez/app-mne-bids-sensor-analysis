@@ -187,15 +187,12 @@ with open(file_name, 'w') as f:
         
     time_frequency_baseline = config.get('time_frequency_baseline', None)
     if isinstance(time_frequency_baseline, list) and len(time_frequency_baseline) == 2:
-        if time_frequency_baseline[0] in [None, 'null', '']:
-            p1 = None
-        else:
-            p1 = time_frequency_baseline[0]
-        p2 = time_frequency_baseline[1]
-        f.write(f"time_frequency_baseline = ({p1}, {p2})\n")
-    elif task_is_rest:
+        if time_frequency_baseline[0] not in [None, 'null', ''] and time_frequency_baseline[1] not in [None, 'null', ""]:
+            p1, p2 = time_frequency_baseline
+            f.write(f"time_frequency_baseline = ({p1}, {p2})\n")
+        elif task_is_rest:
         f.write("time_frequency_baseline = None\n")
-    else:
+        else:
         f.write("time_frequency_baseline = (None, 0)\n")
         
     time_frequency_baseline_mode = config.get('time_frequency_baseline_mode', 'mean')
