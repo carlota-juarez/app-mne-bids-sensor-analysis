@@ -90,6 +90,8 @@ with open(file_name, 'w') as f:
     # Decoding / MVPA
 
     decode = config.get('decode', True)
+    if not contrasts:
+        decode = False
     f.write(f"decode = {decode}\n")
     if decode:
         decoding_which_epochs = config.get('decoding_which_epochs', 'cleaned')
