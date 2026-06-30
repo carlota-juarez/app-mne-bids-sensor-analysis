@@ -17,9 +17,9 @@ import logging
 logging.basicConfig(level = logging.DEBUG)
 logger = logging.getLogger(__name__)
 
-# Current path
+# Current path 
 
-__location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
+__location__ = Path(__file__).resolve().parent
 
 # Read the parameters from Brainlife 
 
@@ -45,17 +45,18 @@ html_report_dir = __location__/'html_report'
 
 # Ensure output directories exist
 
-deriv_root.mkdir(parents = True, exist_ok = True)
+if deriv_root.exists():
+    rmtree(deriv_root)
 html_report_dir.mkdir(parents = True, exist_ok = True)
 
-# Copy the input folder ('bids_root') in the output folder ('out_dir') to have all the data there
 
-if config.get('bids_root') and bids_root_path.exists():
-    copy_tree(config.get('bids_root'), deriv_root)
+# Copy the input folder ('bids_dir') in the output folder ('out_dir') to have all the data there
+
+copytree(bids_root_path, deriv_root, dirs_exist_ok = True)
 
 # Rewrite the info in the .json file into a .py file
 
-file_name = os.path.join(__location__, 'pipeline_config.py')
+file_name = __location__/'pipeline_config.py'
 
 # Inputs from the interface web to MNE variables
 
@@ -63,6 +64,22 @@ with open(file_name, 'w') as f:
 
     f.write(f"bids_root = '{bids_root_path}'\n")
     f.write(f"deriv_root = '{deriv_root}'\n")
+    f.write(f"ch_types = ['eeg']\n")
+
+    # General settings (always nedeed)
+
+    subject = '001'
+    f.write(f"subjects = ['{subject}']\n")
+
+    task = config.get('task', None)
+    if task:
+        f.write(f"task = '{task}'\n")
+
+    task_is_rest = config.get('task_is_rest', False)
+    f.write(f"task_is_rest = {task_is_rest}\n")
+
+    interactive = config.get('interactive', False)
+    f.write(f"interactive = {interactive}\n")
 
     # Condition contrast
 
@@ -169,8 +186,17 @@ with open(file_name, 'w') as f:
     f.write(f"time_frequency_subtract_evoked = {time_frequency_subtract_evoked}\n")
         
     time_frequency_baseline = config.get('time_frequency_baseline', None)
-    if time_frequency_baseline:
-        f.write(f"time_frequency_baseline = {time_frequency_baseline}\n")
+    if isinstance(time_frequency_baseline, list) and len(time_frequency_baseline) == 2:
+        if time_frequency_baseline[0] in [None, 'null', '']:
+            p1 = None
+        else:
+            p1 = time_frequency_baseline[0]
+        p2 = time_frequency_baseline[1]
+        f.write(f"time_frequency_baseline = ({p1}, {p2})\n")
+    elif task_is_rest:
+        f.write("time_frequency_baseline = None\n")
+    else:
+        f.write("time_frequency_baseline = (None, 0)\n")
         
     time_frequency_baseline_mode = config.get('time_frequency_baseline_mode', 'mean')
     if time_frequency_baseline_mode:
