@@ -1,5 +1,5 @@
 {
-    "bids_dir": "./bids_input",
+    "bids_dir": "/input/bids_dataset_preprocessed",
     "contrasts": [
         ["condicion_A", "condicion_B"]
     ],
