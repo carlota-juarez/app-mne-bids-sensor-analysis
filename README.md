@@ -1,1 +1,2 @@
-# MNE-BIDS-Pipeline: sensor analysis
+# MNE-BIDS-Pipeline [2]: Sensor analysis
+
