@@ -22,7 +22,7 @@ The BIDS derivatives folder produced by the M/EEG Preprocessing App (bids_dir) w
 
 # How to run this App on Brainlife 
 
-The App runs inside a Singularity container built from ghcr.io/carlota-juarez/app-mne-bids:lite, based on python:3.11-slim with mne, mne-bids, and mne-bids-pipeline installed. This are the steps to run the App:
+The App runs inside a Singularity container built from ghcr.io/carlota-juarez/app-mne-bids:lite, based on python:3.11-slim with mne, mne-bids, and mne-bids-pipeline installed. These are the steps to run the App:
 1. Register on Brainlife.io and create a project.
 2. Select this App from the App page. Set the output of the previous App as the input and configure the provided parameters to suit the selected data.
 Execute the App. Once completed, the results can be dwonloaded and passed to the Source Analysis App.
