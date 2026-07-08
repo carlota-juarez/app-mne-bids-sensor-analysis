@@ -82,7 +82,7 @@ with open(file_name, 'w') as f:
         ch_types = ['eeg']
         eeg_template_montage = config.get('eeg_template_montage', None)
         if eeg_template_montage:
-            f.write(f"eeg_template_montage = '{eeg_template_montage}'\n")       
+            f.write(f"eeg_template_montage = '{eeg_template_montage}'\n")    
     else:
         meg_ch_types = config.get('meg_ch_types', 'meg')
         ch_types = [meg_ch_types]
