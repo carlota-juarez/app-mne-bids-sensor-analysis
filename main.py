@@ -86,6 +86,8 @@ with open(file_name, 'w') as f:
     else:
         meg_ch_types = config.get('meg_ch_types', 'meg')
         ch_types = [meg_ch_types]
+        # Avoid the empty room error, since the BIDS structure returned by the preprocessing App does not have the associated .json
+        f.write("use_empty_room = False\n")
     f.write(f"ch_types = {ch_types}\n")
 
     subject = '01'
