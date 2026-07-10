@@ -109,6 +109,10 @@ with open(file_name, 'w') as f:
     interactive = config.get('interactive', False)
     f.write(f"interactive = {interactive}\n")
 
+    proc = config.get('proc', None)
+    if proc:
+        f.write(f"proc = '{proc}'\n")
+
     # Condition contrast
 
     contrasts = config.get('contrasts', [])
