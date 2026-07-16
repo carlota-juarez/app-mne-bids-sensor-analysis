@@ -35,3 +35,7 @@ Execute the App. Once completed, the results can be dwonloaded and passed to the
 # Funding 
 
 This App was developed at the Neuroimaging Group, Cajal Neuroscience Center, CSIC
+
+# Acknowledgements
+
+The application avatar is adapted from the MNE-Python hexagonal logo, licensed under CC BY 4.0.
